@@ -1,0 +1,26 @@
+@prefix.command()
+async def type(ctx):
+    starttime = time.time()
+    answer = 'Just a nice little test'
+    timer = 20.0
+    await ctx.send(f"You have {timer} seconds to type: {answer}")
+
+    def is_correct(msg):
+        return msg.author==ctx.author
+
+    try:
+        guess = await client.wait_for('message', check=is_correct, timeout=timer)
+    except asyncio.TimeoutError:
+        return await ctx.send("You took too long :(")
+
+    if guess.content == answer:
+        await ctx.send("You got it!")
+        fintime = time.time()
+        total = fintime - starttime
+        await ctx.send(f"{round(total)} seconds")
+
+    else:
+        await ctx.send("Nope, that wasn't really right")
+        fintime = time.time()
+        total = fintime - starttime
+        await ctx.send(f"{round(total)} seconds") 
