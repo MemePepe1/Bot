@@ -15,18 +15,21 @@ import math
 import random
 from aa import *
 
+
 class Music(commands.Cog):
     def __init__(self, bot):
-      self.bot=bot
+        self.bot = bot
 
     @commands.command()
-    async def join(self,ctx):
-      channel = ctx.author.voice.channel
-      await channel.connect()
+    async def join(self, ctx):
+        channel = ctx.author.voice.channel
+        await channel.connect()
+
     @commands.command()
-    async def leave(self,ctx):
-      channel = ctx.author.voice.channel
-      await ctx.guild.voice_client.disconnect()
+    async def leave(self, ctx):
+        channel = ctx.author.voice.channel
+        await ctx.guild.voice_client.disconnect()
+
 
 def setup(prefix):
-  prefix.add_cog(Music(prefix))
+    prefix.add_cog(Music(prefix))
